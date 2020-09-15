@@ -10,7 +10,7 @@ const Form = () => {
   });
 
   const { categories } = useContext(ContextCategories);
-  const { setSearchRecipes } = useContext(ContextRecipes);
+  const { setSearchRecipes, setSearchState } = useContext(ContextRecipes);
 
   // Function to read contents
   const getRecipeData = e => {
@@ -20,13 +20,16 @@ const Form = () => {
     })
   }
 
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    setSearchRecipes(search);
+    setSearchState(true);
+  }
+
   return (
     <form
       className="col-12"
-      onSubmit={e => {
-        e.preventDefault();
-        setSearchRecipes(search);
-      }}
+      onSubmit={onSubmit}
     >
       <fieldset className="text-center">
         <legend>Search drinks by category or ingredient</legend>
