@@ -8,7 +8,7 @@ export const ContextModal = createContext();
 const ProviderModal = (props) => {
 
   const [recipeID, setRecipeID] = useState(null);
-  const [recipe, setRecipe] = useState({})
+  const [recipeInfo, setRecipeInfo] = useState({})
 
   useEffect(() => {
     const getRecipeDetails = async () => {
@@ -17,7 +17,7 @@ const ProviderModal = (props) => {
       const URL = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${recipeID}`;
 
       const result = await axios.get(URL);
-      setRecipe( result.data.drinks[0]);
+      setRecipeInfo( result.data.drinks[0]);
     }
     getRecipeDetails();
   }, [recipeID])
@@ -25,8 +25,9 @@ const ProviderModal = (props) => {
   return (
     <ContextModal.Provider
       value={{
-        recipe,
-        setRecipeID
+        recipeInfo,
+        setRecipeID,
+        setRecipeInfo
       }}
     >
       {props.children}
